@@ -1,4 +1,6 @@
 /.virtualenv
+/.eggs
 /build
 /dist
 settings.ini
+*.pyc

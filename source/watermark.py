@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
+import os
 import sys
 import tkinter as tk
 import configparser
 from tkinter import messagebox
+from watermarker.marker import watermark_text
 
 
 form = {}
 fieldset = {}
 config = configparser.ConfigParser(allow_no_value=True)
-config_file = 'settings.ini'
+config_file = os.path.join(os.path.dirname(sys.argv[0]), 'settings.ini')
 
 
 def load_settings(set_gui_form=False):
@@ -93,6 +95,8 @@ if __name__ == '__main__':
         makewindow(root)
         makeform(root)
 
+        root.call('wm', 'attributes', '.', '-topmost', True)
+        root.after_idle(root.call, 'wm', 'attributes', '.', '-topmost', False)
         root.mainloop()
 
     # Add Watermark
@@ -100,6 +104,12 @@ if __name__ == '__main__':
 
         load_settings()
         files = set(sys.argv[1:])
+        messagebox.showinfo('File', files)
+        messagebox.showinfo('File', sys.argv)
 
         for file in files:
-            messagebox.showinfo('File', file)
+            # messagebox.showinfo('File', file)
+            print("asd")
+            file = '/Users/contmp/Desktop/IMG_0203.jpeg'
+            watermark_text(file, '%s_watermarked.png' % file, text=form['text'])
+            print("fer")

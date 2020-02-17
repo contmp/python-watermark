@@ -7,14 +7,18 @@ Usage:
 
 from setuptools import setup
 
-APP = ['watermark.py']
-DATA_FILES = []
+APP = ['source/watermark.py']
+DATA_FILES = [
+    'source/watermarker',
+]
 OPTIONS = {}
 
 OPTIONS.update(
+    argv_emulation=True,
     iconfile="assets/Icon.icns",
     plist=dict(
         CFBundleIdentifier='de.contmp.watermark',
+        NSHumanReadableCopyright='Copyright © 2020, Bastian Probian, All Rights Reserved',
         CFBundleDocumentTypes=[
             dict(
                 CFBundleTypeExtensions=["png", "jpg", "jpeg"],
@@ -23,12 +27,14 @@ OPTIONS.update(
             ),
         ]
     ),
-    argv_emulation=1,
+    packages=['PIL', 'pync']
 )
 setup(
     app=APP,
     name='Watermark',
     data_files=DATA_FILES,
-    options={'py2app': OPTIONS},
+    options={
+        'py2app': OPTIONS,
+    },
     setup_requires=['py2app'],
 )
