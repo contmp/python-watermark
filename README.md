@@ -25,6 +25,6 @@ on macOs Window not focused:
 - argv_emulation=True,
 - -psn File Handle
 
-py2app -> Cannot bundle
+py2app -> Cannot bundle  
 pyinstaller -> Cannot use argv
 
